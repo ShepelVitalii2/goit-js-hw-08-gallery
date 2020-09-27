@@ -26,7 +26,7 @@ backdropOverlay.addEventListener("click", onBackdropClickClose);
 //функция создает разметку
 function createImageCardMockup(images) {
   return images
-    .map(({ original, preview, description }) => {
+    .map(({ original, preview, description }, index) => {
       return `
         <li class="gallery__item">
   <a
@@ -37,6 +37,7 @@ function createImageCardMockup(images) {
       class="gallery__image"
       src="${preview}"
       data-source="${original}"
+      data-index="${index}"
       alt="${description}"
     />
   </a>
@@ -64,9 +65,8 @@ function onOpenGalleryContainerClick(evt) {
   const originImgSrc = evt.target.dataset.source;
   modalImgEl.setAttribute("src", originImgSrc);
 
-  //   Я так понимаю, нужен дата атрибут для альт.
-  //   const originImgAlt = evt.target.dataset.alt;
-  //   modalImgEl.setAttribute("alt", originImgAlt);
+  const originImgAlt = evt.target.alt;
+  modalImgEl.setAttribute("alt", originImgAlt);
 }
 
 // закрытие по Эск.
